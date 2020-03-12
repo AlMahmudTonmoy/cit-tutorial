@@ -24,6 +24,11 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-12 ol-lg-12">
                             <div class="table-content wnro__table table-responsive">
+                                @if (session('success'))
+                                    <div class="alert alert-success">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
                                 <table>
                                     <thead>
                                         <tr class="title-top">
@@ -73,9 +78,9 @@
                                   @endif
                                 </li>
                                 <li><a id="apply_code_btn">Apply Code</a></li>
-                                <li><button type="submit">Update Cart</button></li
+                                <li><button type="submit">Update Cart</button></li>
                                 </form>
-                                <li><a href="#">Check Out</a></li>
+                                <li><a href="{{ url('checkout') }}/{{ $coupon_code }}">Check Out</a></li>
                             </ul>
                         </div>
                     </div>

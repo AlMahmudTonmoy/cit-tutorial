@@ -69,149 +69,62 @@
           		<div class="row">
           			<div class="col-lg-6 col-12">
           				<div class="customer_details">
-          					<h3>Billing details</h3>
+                              <form action="{{ url('stripe/payment') }}" method="post">
+                              <h3>Billing details</h3>
+                              @guest
+                                  Please Login to Continue.
+                                  <a href=" {{ url('login') }} ">Login Here..</a>
+                                  <br>
+                                  <hr>
+                                  <br>
+                                  Don't Have an Account?
+                                  <a href=" {{ url('customer/register') }} ">Register Here..</a>
+
+                              @endguest
+                            @auth
           					<div class="customar__field">
           						<div class="margin_between">
   	        						<div class="input_box space_between">
-  	        							<label>First name <span>*</span></label>
-  	        							<input type="text" value="{{ Auth::user()->name }}">
+  	        							<label>Name <span>*</span></label>
+										  {{-- @auth --}}
+										  	<input type="text" value="{{ Auth::user()->name ?? "" }}" name="name">
+										  {{-- @endauth --}}
   	        						</div>
   	        						<div class="input_box space_between">
-  	        							<label>last name <span>*</span></label>
-  	        							<input type="text">
+  	        							<label>Email <span>*</span></label>
+  	        							{{-- @auth --}}
+											<input type="email" value="{{ Auth::user()->email ?? "" }}" name="email">
+										{{-- @endauth --}}
   	        						</div>
-          						</div>
-          						<div class="input_box">
-          							<label>Company name <span>*</span></label>
-          							<input type="text">
           						</div>
           						<div class="input_box">
           							<label>Country<span>*</span></label>
-          							<select class="select__option">
-  										<option>Select a country…</option>
-  										<option>Afghanistan</option>
-  										<option>American Samoa</option>
-  										<option>Anguilla</option>
-  										<option>American Samoa</option>
-  										<option>Antarctica</option>
-  										<option>Antigua and Barbuda</option>
+          							<select class="select__option" id="country_dropdown" name="country_id">
+										<option value="">Select a country…</option>
+										@foreach ($countries as $country)
+									  		<option value="{{ $country->id }}">{{ $country->name }}</option>
+										@endforeach
           							</select>
           						</div>
           						<div class="input_box">
-          							<label>Address <span>*</span></label>
-          							<input type="text" placeholder="Street address">
-          						</div>
-          						<div class="input_box">
-          							<input type="text" placeholder="Apartment, suite, unit etc. (optional)">
-          						</div>
-          						<div class="input_box">
-          							<label>District<span>*</span></label>
-          							<select class="select__option">
-  										<option>Select a country…</option>
-  										<option>Afghanistan</option>
-  										<option>American Samoa</option>
-  										<option>Anguilla</option>
-  										<option>American Samoa</option>
-  										<option>Antarctica</option>
-  										<option>Antigua and Barbuda</option>
+          							<label>City<span>*</span></label>
+          							<select class="select__option" id="city_dropdown" name="city_id">
           							</select>
-          						</div>
-  								<div class="input_box">
-  									<label>Postcode / ZIP <span>*</span></label>
-  									<input type="text">
-  								</div>
+								  </div>
+								<div class="input_box">
+									<label>Address <span>*</span></label>
+									<input type="text" placeholder="address" name="address">
+								</div>
   								<div class="margin_between">
   									<div class="input_box space_between">
   										<label>Phone <span>*</span></label>
-  										<input type="text">
+  										<input type="text" name="phone_number">
   									</div>
+  								</div>
+          					</div>
+                            @endauth
+          				</div>
 
-  									<div class="input_box space_between">
-  										<label>Email address <span>*</span></label>
-  										<input type="email">
-  									</div>
-  								</div>
-          					</div>
-          					<div class="create__account">
-          						<div class="wn__accountbox">
-  	        						<input class="input-checkbox" name="createaccount" value="1" type="checkbox">
-  	        						<span>Create an account ?</span>
-          						</div>
-          						<div class="account__field">
-          							<form action="#">
-          								<label>Account password <span>*</span></label>
-          								<input type="text" placeholder="password">
-          							</form>
-          						</div>
-          					</div>
-          				</div>
-          				<div class="customer_details mt--20">
-          					<div class="differt__address">
-  	        					<input name="ship_to_different_address" value="1" type="checkbox">
-  	        					<span>Ship to a different address ?</span>
-          					</div>
-          					<div class="customar__field differt__form mt--40">
-          						<div class="margin_between">
-  	        						<div class="input_box space_between">
-  	        							<label>First name <span>*</span></label>
-  	        							<input type="text">
-  	        						</div>
-  	        						<div class="input_box space_between">
-  	        							<label>last name <span>*</span></label>
-  	        							<input type="text">
-  	        						</div>
-          						</div>
-          						<div class="input_box">
-          							<label>Company name <span>*</span></label>
-          							<input type="text">
-          						</div>
-          						<div class="input_box">
-          							<label>Country<span>*</span></label>
-          							<select class="select__option">
-  										<option>Select a country…</option>
-  										<option>Afghanistan</option>
-  										<option>American Samoa</option>
-  										<option>Anguilla</option>
-  										<option>American Samoa</option>
-  										<option>Antarctica</option>
-  										<option>Antigua and Barbuda</option>
-          							</select>
-          						</div>
-          						<div class="input_box">
-          							<label>Address <span>*</span></label>
-          							<input type="text" placeholder="Street address">
-          						</div>
-          						<div class="input_box">
-          							<input type="text" placeholder="Apartment, suite, unit etc. (optional)">
-          						</div>
-          						<div class="input_box">
-          							<label>District<span>*</span></label>
-          							<select class="select__option">
-  										<option>Select a country…</option>
-  										<option>Afghanistan</option>
-  										<option>American Samoa</option>
-  										<option>Anguilla</option>
-  										<option>American Samoa</option>
-  										<option>Antarctica</option>
-  										<option>Antigua and Barbuda</option>
-          							</select>
-          						</div>
-  								<div class="input_box">
-  									<label>Postcode / ZIP <span>*</span></label>
-  									<input type="text">
-  								</div>
-  								<div class="margin_between">
-  									<div class="input_box space_between">
-  										<label>Phone <span>*</span></label>
-  										<input type="text">
-  									</div>
-  									<div class="input_box space_between">
-  										<label>Email address <span>*</span></label>
-  										<input type="email">
-  									</div>
-  								</div>
-          					</div>
-          				</div>
           			</div>
           			<div class="col-lg-6 col-12 md-mt-40 sm-mt-40">
           				<div class="wn__order__box">
@@ -221,28 +134,53 @@
           						<li>Total</li>
           					</ul>
           					<ul class="order_product">
-          						<li>Buscipit at magna × 1<span>$48.00</span></li>
-          						<li>Buscipit at magna × 1<span>$48.00</span></li>
-          						<li>Buscipit at magna × 1<span>$48.00</span></li>
-          						<li>Buscipit at magna × 1<span>$48.00</span></li>
+                                  @foreach (getcartproducts() as $getcartproduct)
+                                      <li>{{ $getcartproduct->relationtoproducttable->product_name }} × {{ $getcartproduct->quantity }} <span>${{ $getcartproduct->relationtoproducttable->product_price * $getcartproduct->quantity }} </span></li>
+                                  @endforeach
           					</ul>
           					<ul class="shipping__method">
-          						<li>Cart Subtotal <span>$48.00</span></li>
-          						<li>Shipping
+          						<li>Cart Subtotal <span>${{ getcarttotalprice() }}</span></li>
+          						<li>
+                                    <input type="hidden" name="coupon_code" value="{{ $coupon_code }}">
+                                      Discount(-) {{ $coupon_code }} <span>
+                                      ${{ $discount_amount }}
+                                    </span></li>
+          						<li>After Discount <span>
+                                    $
+                                    <span id="after_discount_amount">
+                                        @if (Str::endsWith($discount_amount, '%'))
+                                            @php
+                                                echo $after_discount = getcarttotalprice() - ((Str::before($discount_amount, '%') / 100) * getcarttotalprice())
+                                            @endphp
+                                        @else
+                                            @if (getcarttotalprice() > $discount_amount)
+                                                @php
+                                                    echo $after_discount = getcarttotalprice() - $discount_amount
+                                                @endphp
+                                            @else
+                                            Na
+                                            @endif
+                                        @endif
+                                    </span>
+                                    </span></li>
+          						<li>Shipping(+)
           							<ul>
           								<li>
-          									<input name="shipping_method[0]" data-index="0" value="legacy_flat_rate" checked="checked" type="radio">
-          									<label>Flat Rate: $48.00</label>
+          									<input name="shipping_charge" data-index="0" value="60" checked="checked" type="radio" id="shipping_charge_dhaka">
+          									<label>Dhaka: $60.00</label>
           								</li>
           								<li>
-          									<input name="shipping_method[0]" data-index="0" value="legacy_flat_rate" checked="checked" type="radio">
-          									<label>Flat Rate: $48.00</label>
+          									<input name="shipping_charge" data-index="0" value="120" type="radio" id="shipping_charge">
+          									<label>Outside of Dhaka: $220.00</label>
           								</li>
           							</ul>
           						</li>
           					</ul>
           					<ul class="total__amount">
-          						<li>Order Total <span>$223.00</span></li>
+                                <input type="hidden" id="order_total_input" name="order_total_input" value=" {{ $after_discount + 60 }} ">
+          						<li>Order Total <span>$ <span id="order_total_amount">
+                                    {{ $after_discount + 60 }}
+                                </span> </span></li>
           					</ul>
           				</div>
   					    <div id="accordion" class="checkout_accordion mt--30" role="tablist">
@@ -279,11 +217,26 @@
   						    <div class="payment">
   						        <div class="che__header" role="tab" id="headingFour">
   						          	<a class="collapsed checkout__title" data-toggle="collapse" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-  							            <span>PayPal <img src="images/icons/payment.png" alt="payment images"> </span>
+                                        <span>Online Payment</span>
   						          	</a>
   						        </div>
   						        <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour" data-parent="#accordion">
-  					          		<div class="payment-body">Pay with cash upon delivery.</div>
+  					          		<div class="payment-body">
+                                        @guest
+                                            Please Login to Continue.
+                                            <a href=" {{ url('login') }} ">Login Here..</a>
+                                        @endguest
+                                        @auth
+                                            @csrf
+                                            <input type="hidden" name="total_to_pay" value="{{ $after_discount + 60 }}" id="total_to_pay">
+                                            <button type="submit" style="width: 20%; border: none;"">
+                                                <img src="https://ioetraders.com/wp-content/uploads/2019/12/stripe-payment-method.png">
+                                            </button>
+                                        @endauth
+                                </form>
+                                        <a href="http://">
+                                        </a>
+                                    </div>
   						        </div>
   						    </div>
   					    </div>
@@ -305,5 +258,43 @@
 
       })
     })
+
   </script>
+  <script type="text/javascript">
+	$(document).ready(function() {
+		$('#country_dropdown').select2();
+		$('#city_dropdown').select2();
+		$('#country_dropdown').change(function(){
+			var country_id = $(this).val();
+			//ajax starts here
+			$.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+			});
+			$.ajax({
+				type:'POST',
+				url:'/getcitylist',
+				data:{country_id:country_id},
+				success:function(data){
+					$('#city_dropdown').html(data);
+				}
+			})
+			//ajax ends here
+        });
+
+        $('#shipping_charge_dhaka').click(function () {
+            var after_discount_amount = parseFloat($('#after_discount_amount').html()) + 60;
+            $('#order_total_amount').html(after_discount_amount);
+            $('#order_total_input').val(after_discount_amount);
+            $('#total_to_pay').val(after_discount_amount);
+        });
+        $('#shipping_charge').click(function () {
+            var after_discount_amount = parseFloat($('#after_discount_amount').html()) + 120;
+            $('#order_total_amount').html(after_discount_amount);
+            $('#order_total_input').val(after_discount_amount);
+            $('#total_to_pay').val(after_discount_amount);
+        });
+	});
+</script>
 @endsection

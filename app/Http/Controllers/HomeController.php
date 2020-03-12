@@ -8,6 +8,8 @@ use Auth;
 use App\Coupon;
 use Str;
 use Carbon\Carbon;
+use App\Charts\BikriChart;
+use App\Sale;
 
 class HomeController extends Controller
 {
@@ -32,7 +34,18 @@ class HomeController extends Controller
     {
         $user_id = Auth::user()->id;
         $users = User::where('id', '!=', $user_id)->get();
-        return view('home', compact('users'));
+
+        $card_payment = Sale::where('payment_method', 1)->count();
+        $COD = Sale::where('payment_method', 2)->count();
+        $bank_transfer = Sale::where('payment_method', 3)->count();
+
+        $chart = new BikriChart;
+        $chart->labels(['Card Payment', 'Cash On Delivery', 'Bank Transfer']);
+        $chart->dataset('Bikri Stat', 'doughnut', [$card_payment, $COD, $bank_transfer])->options([
+            'backgroundColor' => ["#538f8f", "#2da854", "#7257ad"],
+        ]);
+
+        return view('home', compact('users', 'chart'));
     }
     function contactuploaddownload($file_name) {
       return Storage::download('contacts_uploads/'.$file_name);

@@ -66,15 +66,17 @@
           								</div>
   										<div class="product__overview">
           									<p>{{ $fproduct_info->product_short_description ?? "No Short Descritption Available" }}</p>
-          								</div>
-                          <form class="" action="{{ route('addtocart') }}" method="post">
-                            @csrf
-                            <input type="hidden" name="product_id" value="{{ $fproduct_info->id }}">
-          								<div class="box-tocart d-flex">
-          									<span>Qty</span>
-          									<input id="qty" class="input-text qty" name="quantity" min="1" value="1" title="Qty" type="number">
-          									<div class="addtocart__actions">
+                                          </div>
+                                          <form class="" action="{{ route('addtocart') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $fproduct_info->id }}">
+                                            <div class="box-tocart d-flex">
+                                                <span>Qty</span>
+                                                <input id="qty" class="input-text qty" name="quantity" min="1" value="1" title="Qty" type="number">
+                                                <div class="addtocart__actions">
+                                @if ($fproduct_info->product_quantity != 0)
                                 <button class="tocart" type="submit" title="Add to Cart">Add to Cart</button>
+                                @endif
           									</div>
   											<div class="product-addto-links clearfix">
   												<a class="wishlist" href="#" style="background: #ffffff url('{{ asset('frontend_assets/images/icons/product-info.png') }}') no-repeat scroll 0 0;"></a>

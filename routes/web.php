@@ -77,6 +77,7 @@ Route::post('/cart/update', 'CartController@cartupdate')->name('cartupdate');
 
 //customer route
 Route::get('customer/dashboard', 'CustomerController@customerdashboard')->name('customerdashboard');
+Route::get('download/pdf/{sale_id}', 'CustomerController@downloadpdf')->name('downloadpdf');
 
 //github Controller Socialite
 Route::get('login/github', 'GithubController@redirectToProvider');
@@ -88,3 +89,9 @@ Route::get('login/google/callback', 'GoogleController@handleProviderCallback');
 
 //checkout Controllers
 Route::get('/checkout', 'CheckoutController@checkout')->name('checkout');
+Route::get('/checkout/{coupon_code}', 'CheckoutController@checkout')->name('checkoutwithcoupon');
+Route::post('/getcitylist', 'CheckoutController@getcitylist')->name('getcitylist');
+
+//Stripe Controllers
+Route::post('stripe/payment', 'StripePaymentController@stripe');
+Route::post('stripe', 'StripePaymentController@stripePost')->name('stripe.post');

@@ -5,6 +5,7 @@
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<title>Home | Bookshop Responsive Bootstrap4 Template</title>
 	<meta name="description" content="">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- Favicons -->
@@ -23,6 +24,8 @@
 
 	<!-- Cusom css -->
    <link rel="stylesheet" href="{{ asset('frontend_assets/css/custom.css') }}">
+
+   <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
 
 	<!-- Modernizer js -->
 	<script src="{{ asset('frontend_assets/js/vendor/modernizr-3.5.0.min.js') }}"></script>
@@ -82,7 +85,7 @@
 											<span>${{ getcarttotalprice() }}</span>
 										</div>
 										<div class="mini_action checkout">
-											<a class="checkout__btn" href="{{ route('cart') }}">Go to Checkout</a>
+											<a class="checkout__btn" href="{{ route('checkout') }}">Go to Checkout</a>
 										</div>
 										<div class="single__items">
 											<div class="miniproduct">
@@ -253,6 +256,7 @@
 	<script src="{{ asset('frontend_assets/js/bootstrap.min.js') }}"></script>
 	<script src="{{ asset('frontend_assets/js/plugins.js') }}"></script>
 	<script src="{{ asset('frontend_assets/js/active.js') }}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
   @yield('footer_scripts')
 </body>
 </html>
