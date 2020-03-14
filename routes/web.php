@@ -12,6 +12,7 @@
 */
 
 //frontend controller routes
+
 Route::get('/', 'FrontendController@index');
 Route::get('contact', 'FrontendController@contact');
 Route::post('contact/submit', 'FrontendController@contactsubmit');
@@ -95,3 +96,6 @@ Route::post('/getcitylist', 'CheckoutController@getcitylist')->name('getcitylist
 //Stripe Controllers
 Route::post('stripe/payment', 'StripePaymentController@stripe');
 Route::post('stripe', 'StripePaymentController@stripePost')->name('stripe.post');
+
+//SearchControllers
+Route::get('search/', 'SearchController@search')->name('search');

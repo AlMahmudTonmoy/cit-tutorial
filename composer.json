@@ -17,6 +17,7 @@
         "laravel/framework": "^6.0",
         "laravel/socialite": "^4.3",
         "laravel/tinker": "^1.0",
+        "spatie/laravel-query-builder": "^2.8",
         "stripe/stripe-php": "^7.27"
     },
     "require-dev": {

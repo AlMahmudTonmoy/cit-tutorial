@@ -165,9 +165,9 @@
 		<!-- //Header -->
 		<!-- Start Search Popup -->
 		<div class="brown--color box-search-content search_active block-bg close__top">
-			<form id="search_mini_form" class="minisearch" action="#">
+			<form id="search_mini_form" class="minisearch" action="{{ route('search') }}" method="GET">
 				<div class="field__search">
-					<input type="text" placeholder="Search entire store here...">
+					<input type="text" placeholder="Search entire store here..." name="filter[product_name]">
 					<div class="action">
 						<a href="#"><i class="zmdi zmdi-search"></i></a>
 					</div>
@@ -258,5 +258,19 @@
 	<script src="{{ asset('frontend_assets/js/active.js') }}"></script>
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
   @yield('footer_scripts')
+  <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5e6bd6aeeec7650c331fe6ba/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
 </body>
 </html>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Invoice;
 use App\Sale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,8 +17,8 @@ class CustomerController extends Controller
       ]);
     }
     function downloadpdf($sale_id){
-        $pdf = PDF::loadView('pdf.invoice', compact('sale_id'));
-        // return $pdf->download('invoice.pdf');
+        $invoices = Invoice::where('sale_id', $sale_id)->with('relationtoproducttable')->get();
+        $pdf = PDF::loadView('pdf.invoice', compact('sale_id', 'invoices'));
         return $pdf->stream('invoice.pdf');
     }
 }
