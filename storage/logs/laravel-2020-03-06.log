@@ -1,0 +1,4 @@
+[2020-03-06 02:01:02] local.ERROR: Allowed memory size of 536870912 bytes exhausted (tried to allocate 266342400 bytes) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 1): Allowed memory size of 536870912 bytes exhausted (tried to allocate 266342400 bytes) at F:\\cit-tutorial\\app\\Http\\Controllers\\StripePaymentController.php:19)
+[stacktrace]
+#0 {main}
+"} 
